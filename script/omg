@@ -1,0 +1,126 @@
+#!/usr/bin/env python
+# encoding: UTF-8
+
+"""A little hack to find users on Github similar to the given user, based
+on what respositories they've starred.
+
+This hack is in the public domain; see the file UNLICENSE for details.
+
+"""
+
+import getpass
+import optparse
+import re
+import sys
+import time
+
+from simplejson.decoder import JSONDecodeError
+
+import requests
+
+IGNORE_THESE_USERS = (
+    'hcilab',                       # they have 44K starred!
+    'equus12',                      # they have 21K starred!
+)
+
+IGNORE_THESE_REPOS = (
+    'vhf/free-programming-books',   # it has 20K stars!
+)
+
+
+def each_api_thing(username, url_template, auth=None,
+                   api_prefix='https://api.github.com'):
+    url = (api_prefix + url_template) % username
+
+    done = False
+    while not done:
+        response = requests.get(url, auth=auth)
+        try:
+            data = response.json()
+        except JSONDecodeError:
+            sys.stderr.write(
+                "WARNING: got malformed response.  Trying again in 5 seconds.\n"
+            )
+            time.sleep(5)
+            continue
+        if 'message' in data:
+            raise ValueError(data)
+        for x in data:
+            yield x
+        link = response.headers.get('Link', None)
+        if link is None:
+            done = True
+        else:
+            match = re.match(r'\<(.*?)\>\s*\;\s*rel\s*=\s*\"next\"', link)
+            if not match:
+                done = True
+            else:
+                url = match.group(1)
+
+
+def each_user_star(username, auth=None):
+    for x in each_api_thing(username, '/users/%s/starred', auth=auth):
+        yield x
+
+
+def each_repo_stargazer(reponame, auth=None):
+    for x in each_api_thing(reponame, '/repos/%s/stargazers', auth=auth):
+        yield x
+
+
+def main(args):
+    parser = optparse.OptionParser(__doc__)
+
+    parser.add_option("--login", dest="login",
+                      default=None, metavar='USERNAME',
+                      help="username to login with when using the "
+                           "Github API")
+
+    (options, args) = parser.parse_args(args)
+    try:
+        username = args[0]
+    except IndexError:
+        print "Usage: omg {options} username"
+        print "Run `omg --help` to see full usage."
+        sys.exit(1)
+
+    auth = None
+    if options.login is not None:
+        password = getpass.getpass('Password: ')
+        auth = (options.login, password)
+
+    print "getting %s's stars..." % username
+    userstars = {}
+    userstars[username] = set()
+    for x in each_user_star(username, auth=auth):
+        userstars[username].add(x['full_name'])
+    for reponame in sorted(userstars[username]):
+        if reponame in IGNORE_THESE_REPOS:
+            continue
+        print "getting %s's stargazers..." % reponame
+        for y in each_repo_stargazer(reponame, auth=auth):
+            userstars.setdefault(y['login'], set()).add(reponame)
+    similarusers = []
+    for similaruser in userstars:
+        if similaruser == username or similaruser in IGNORE_THESE_USERS:
+            continue
+        sharedstars = userstars[similaruser] & userstars[username]
+        if len(sharedstars) > 2:
+            similarusers.append((similaruser, sharedstars))
+    similarusers.sort(key=lambda (name, shared): (0 - len(shared), name))
+    print
+    print "-------------"
+    print
+    print "Based on starred repositories, the Github users with tastes"
+    print "most similar to %s's are:" % username
+    print
+    for (similaruser, sharedstars) in similarusers:
+        print "https://github.com/%s" % similaruser
+        print "with %s stars in common:" % len(sharedstars)
+        for star in sorted(sharedstars):
+            print "* https://github.com/%s" % star
+        print
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
