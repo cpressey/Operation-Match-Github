@@ -117,7 +117,7 @@ About the Script
 ----------------
 
 `omg` came into existence as a weekend hack, playing with the Github API
-(after using it for more serious purposes in (toolshelf)[https://github.com/catseye/toolshelf].)
+(after using it for more serious purposes in [toolshelf](https://github.com/catseye/toolshelf).)
 
 "Operation Match" was the name of a major early computer dating project in
 the USA.  According to 
@@ -208,7 +208,7 @@ and add a link to it here.
 Footnotes
 ---------
 
-1.  The Avco 1790 sounds like a lovely piece of antidiluvian hardware,
+1.  The Avco 1790 sounds like a lovely piece of antediluvian hardware,
     doesn't it?  Unfortunately, all of my attempts thus far to find out
     more about it by searching the web have only led back to articles about
     Operation Match.
