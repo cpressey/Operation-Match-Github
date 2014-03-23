@@ -9,6 +9,20 @@ UNLICENSE for more information.  By opening a pull request on this repository,
 you agree to release your proposed changes into the public domain, under this
 same UNLICENSE, as well.
 
+About the Script
+----------------
+
+`omg` came into existence as a weekend hack, playing with the Github API
+(after using it for more serious purposes in [toolshelf](https://github.com/catseye/toolshelf).)
+
+"Operation Match" was the name of a major early computer dating project in
+the USA.  According to 
+[this 1965 article](http://www.thecrimson.com/article/1965/11/3/operation-match-pif-you-stop-to/),
+it ran on a computer called the Avco 1790 (footnote 1).  While `omg` *could*
+be used for computer dating, the author cannot in good conscience recommend
+this use case.  Try just following them first.  This is OK because on Github,
+following is not the same thing as stalking.
+
 Quick Start
 -----------
 
@@ -40,8 +54,6 @@ Sample Run
 
 > ...and it goes *on* like this.  Go mow the lawn or something
 
-    getting whily/yalo's stargazers...
-    getting workmajj/boogiewoogie's stargazers...
     getting xrchz/vml's stargazers...
     getting yaxu/Tidal's stargazers...
     getting yinwang0/pysonar2's stargazers...
@@ -58,33 +70,9 @@ Sample Run
     * https://github.com/aliclark/hasp
     * https://github.com/augustl/halt
     * https://github.com/carlini/rhoscript
-    * https://github.com/clemahieu/mu
-    * https://github.com/crcx/retro-language
-    * https://github.com/cthulhuology/firth
-    * https://github.com/darius/ichbins
-    * https://github.com/digego/extempore
-    * https://github.com/diiq/eight
-    * https://github.com/emdash/goof
-    * https://github.com/erlware/joxa
-    * https://github.com/faylang/fay
-    * https://github.com/grahamedgecombe/arc
-    * https://github.com/griwes/ReaverOS
-    * https://github.com/hellcoderz/schemec
-    * https://github.com/jckarter/clay
-    * https://github.com/krig/LISP
-    * https://github.com/leepike/Copilot
-    * https://github.com/libcpu/libcpu
-    * https://github.com/matijapretnar/eff
-    * https://github.com/msullivan/LazyK
-    * https://github.com/nuisanceofcats/nyah
-    * https://github.com/perl11/potion
-    * https://github.com/pikatchu/LinearML
-    * https://github.com/pikhq/clambda-demo
-    * https://github.com/samrushing/irken-compiler
-    * https://github.com/sanjoy/L
-    * https://github.com/santoshrajan/lispyscript
-    * https://github.com/smtlaissezfaire/bcompiler
-    * https://github.com/vIiRuS/brainfuck-asm
+
+> ...etc...
+
     * https://github.com/viznut/IBNIZ
     * https://github.com/weiju/bootstrap-lisp
     * https://github.com/whily/yalo
@@ -112,20 +100,6 @@ Sample Run
     * https://github.com/antirez/load81
 
 > ...etc etc etc
-
-About the Script
-----------------
-
-`omg` came into existence as a weekend hack, playing with the Github API
-(after using it for more serious purposes in [toolshelf](https://github.com/catseye/toolshelf).)
-
-"Operation Match" was the name of a major early computer dating project in
-the USA.  According to 
-[this 1965 article](http://www.thecrimson.com/article/1965/11/3/operation-match-pif-you-stop-to/),
-it ran on a computer called the Avco 1790 (footnote 1).  While `omg` *could*
-be used for computer dating, the author cannot in good conscience recommend
-this use case.  Try just following them first.  This is OK because on Github,
-following is not the same thing as stalking.
 
 Evaluation
 ----------
